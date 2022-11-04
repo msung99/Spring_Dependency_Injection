@@ -5,10 +5,7 @@ import com.example.demo.Order.OrderServiceImpl;
 import com.example.demo.discount.DiscountPolicy;
 import com.example.demo.discount.FixDiscountPolicy;
 import com.example.demo.discount.RateDiscountPolicy;
-import com.example.demo.member.Member;
-import com.example.demo.member.MemberService;
-import com.example.demo.member.MemberServiceImpl;
-import com.example.demo.member.MemoryMemberRepository;
+import com.example.demo.member.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -29,7 +26,7 @@ public class AppConfig {
     }
 
     @Bean
-    public static MemoryMemberRepository memberRepository() {
+    public MemberRepository memberRepository() {
         return new MemoryMemberRepository();
     }
 

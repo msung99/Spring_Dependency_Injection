@@ -5,6 +5,8 @@ import com.example.demo.member.MemberService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 // 싱글톤 패턴을 적용하면 고객의 요청이 들어올 때 마다 객체를 생성하는 것이 아니라,
 // 이미 만들어진 객체를 공유해서 효율적으로 사용할 수 있다. 하지만 싱글톤 패턴을 다음과 같은 수 많은 문제점들을 가지고 있다.
@@ -54,5 +56,21 @@ public class SingletonTest {
         System.out.println("singletonService2 = " + singletonService2);
 
         Assertions.assertThat(singletonService1).isSameAs(singletonService2);
+    }
+
+    @Test
+    @DisplayName("스프링 없는 순수한 DI 컨테이너")
+    void springContainer(){
+        ApplicationContext ac =  new AnnotationConfigApplicationContext(AppConfig.class);
+
+        MemberService memberService1 = ac.getBean("memberService", MemberService.class);
+        MemberService memberService2 = ac.getBean("memberService", MemberService.class);
+
+        // 참조값이 다른것을 확인
+        System.out.println("memberService1 = " + memberService1);
+        System.out.println("memberService2 = " + memberService2);
+
+        // 진짜로 참조값(객체) 가 다른지 다시한번 검증
+        Assertions.assertThat(memberService1).isSameAs(memberService2);
     }
 }
