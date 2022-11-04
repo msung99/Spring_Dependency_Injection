@@ -5,10 +5,7 @@ import com.example.demo.Order.OrderServiceImpl;
 import com.example.demo.discount.DiscountPolicy;
 import com.example.demo.discount.FixDiscountPolicy;
 import com.example.demo.discount.RateDiscountPolicy;
-import com.example.demo.member.Member;
-import com.example.demo.member.MemberService;
-import com.example.demo.member.MemberServiceImpl;
-import com.example.demo.member.MemoryMemberRepository;
+import com.example.demo.member.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -24,12 +21,12 @@ public class AppConfig {
 
     // 애플리케이션에 적용시킬 구현체가 변경될때, AppConfig 의 생성자 주입 부분만 딱 1줄만 수정하면 된다!
     @Bean
-    public MemberService memberService() { // 생성자 주입
+    public MemberService  memberService() { // 생성자 주입
         return new MemberServiceImpl(memberRepository());
     }
 
     @Bean
-    public static MemoryMemberRepository memberRepository() {
+    public MemberRepository memberRepository() {
         return new MemoryMemberRepository();
     }
 
