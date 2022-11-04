@@ -24,7 +24,7 @@ public class AppConfig {
 
     // 애플리케이션에 적용시킬 구현체가 변경될때, AppConfig 의 생성자 주입 부분만 딱 1줄만 수정하면 된다!
     @Bean
-    public MemberService memberService() { // 생성자 주입
+    public MemberService  memberService() { // 생성자 주입
         return new MemberServiceImpl(memberRepository());
     }
 
