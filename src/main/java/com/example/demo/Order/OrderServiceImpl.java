@@ -8,10 +8,11 @@ import com.example.demo.member.MemberRepository;
 import com.example.demo.member.MemoryMemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor // lombok 의 기능 => 생성자를 자동생성
+// @RequiredArgsConstructor // lombok 의 기능 => 생성자를 자동생성. 이 기능을 사용하면 final이 붙은 필드를 모아서 "생성자룰 자동으로 만들어준다"
 public class OrderServiceImpl implements OrderService{
 
     private final MemberRepository memberRepository; // = new MemoryMemberRepository();
@@ -35,12 +36,12 @@ public class OrderServiceImpl implements OrderService{
     // OrderServiceImpl 입장에서는 생성자를 통해 어떤 구현 객체가 들어올지(주입될지)는 알 수 없다.
     // 생성자를 통해서 어떤 구현 객체를 주입할지는 오직 외부(AppConfig) 에서 결정한다.
 
-    /*
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy){
+    @Autowired--
+    public OrderServiceImpl(MemberRepository memberRepository, @Qualifier("mainDiscountPolicy")  DiscountPolicy rateDiscountPolicy){
         this.memberRepository = memberRepository;
-        this.discountPolicy = discountPolicy;
+        this.discountPolicy = rateDiscountPolicy;
     }
-    */
+
 
     public MemberRepository getMemberRepository() {
         return memberRepository;
