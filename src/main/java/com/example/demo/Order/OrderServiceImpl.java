@@ -36,7 +36,7 @@ public class OrderServiceImpl implements OrderService{
     // OrderServiceImpl 입장에서는 생성자를 통해 어떤 구현 객체가 들어올지(주입될지)는 알 수 없다.
     // 생성자를 통해서 어떤 구현 객체를 주입할지는 오직 외부(AppConfig) 에서 결정한다.
 
-    @Autowired--
+    @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, @Qualifier("mainDiscountPolicy")  DiscountPolicy rateDiscountPolicy){
         this.memberRepository = memberRepository;
         this.discountPolicy = rateDiscountPolicy;
